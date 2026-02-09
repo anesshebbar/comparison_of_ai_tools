@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 500px; background-color: #fdfaf6;">
+        <div class="card-body">
+            <h1 class="card-title mb-4 text-dark">You’ve been logged out</h1>
+            <p class="card-text text-muted">We hope to see you again soon! 💫</p>
+            <a href="{% url 'login' %}" class="btn btn-outline-dark mt-3 rounded-pill px-4">Login again</a>
+            <a href="{% url 'home' %}" class="btn btn-link mt-3 d-block text-decoration-none">Back to homepage</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

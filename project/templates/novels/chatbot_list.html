@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}chatbot List{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <form method="get" class="d-flex">
+                <input type="text" name="q" class="form-control me-2 shadow-sm rounded-pill" placeholder="Search chatbots..." value="{{ query }}">
+                <button type="submit" class="btn btn-dark rounded-pill px-4">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for chatbot in chatbots %}
+            <div class="col d-flex">
+                <div class="card shadow-sm border-0 w-100" style="background-color: #fdfaf6;">
+                    <img src="{{ chatbot.img_url }}" class="card-img-top rounded-top" alt="{{ chatbot.title }}" onerror="this.src='https://via.placeholder.com/300x400'">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-dark">{{ chatbot.title }}</h5>
+                        <p class="card-text text-muted small">
+                            {{ chatbot.showtype }} | {{ chatbot.language }} | {{ chatbot.year }}
+                        </p>
+                        <p class="card-text text-secondary small flex-grow-1">{{ chatbot.description|truncatewords:30 }}</p>
+                        {% if chatbot.id %}
+                            <a href="{% url 'chatbot_detail' chatbot.id %}" class="btn btn-outline-dark mt-auto rounded-pill">View Details</a>
+                        {% else %}
+                            <button class="btn btn-secondary mt-auto rounded-pill" disabled>No Details</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">No chatbot found.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
